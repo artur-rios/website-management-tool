@@ -1,0 +1,29 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="min-w-150 max-w-500 w-full"
+>
+  <div class="w-full">
+    <ng-container *ngFor="let field of formFields">
+      <mat-form-field class="w-full">
+        <mat-label>{{ field.label }}</mat-label>
+        <input
+          matInput
+          [type]="field.type"
+          [formControl]="getFormControl(field.name)"
+        />
+        <mat-error *ngFor="let validation of field.validationMessages">
+          <mat-error
+            *ngIf="f[field.name].hasError(validation.type) && submitted"
+          >
+            {{ validation.message }}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+    </ng-container>
+  </div>
+
+  <div class="w-full">
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </div>
+</form>

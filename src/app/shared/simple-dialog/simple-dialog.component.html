@@ -1,0 +1,24 @@
+<div class="m-0 p-0">
+  <div
+    class="w-full pt-10 pr-0 pb-10 pl-0 text-accent bg-primary text-center text-xl rounded-t-xl"
+  >
+    {{ data.title }}
+  </div>
+  <div class="bg-white pt-40 pr-[5%] pb-20 pl-[4%] text-center rounded-t-xl">
+    <p>
+      {{ data.message }}
+    </p>
+    <div>
+      <ng-container *ngFor="let button of data.buttons">
+        <div class="mb-10">
+          <button
+            class="w-1/2 m-auto pt-10 pr-0 pb-10 pl-0 bg-primary text-accent"
+            (click)="buttonClick(button.text)"
+          >
+            {{ button.text }}
+          </button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
