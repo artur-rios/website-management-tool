@@ -9,13 +9,16 @@ import { FormField } from 'src/app/shared/form/form.component';
 })
 export class LoginComponent {
   private validationMessages = {
-    email: [{ type: 'required', message: 'Type your e-mail' }],
+    email: [
+      { type: 'required', message: 'Type your e-mail' },
+      { type: 'email', message: 'Enter a valid e-mail' },
+    ],
     password: [{ type: 'required', message: 'Type your password' }],
   };
 
   public formFields: Array<FormField> = [
     {
-      formControl: new FormControl('', Validators.required),
+      formControl: new FormControl('', [Validators.required, Validators.email]),
       label: 'E-mail',
       name: 'email',
       type: 'email',
