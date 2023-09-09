@@ -12,13 +12,13 @@
           [type]="field.type"
           [formControl]="getFormControl(field.name)"
         />
-        <mat-error *ngFor="let validation of field.validationMessages">
+        <ng-container *ngFor="let validation of field.validationMessages">
           <mat-error
             *ngIf="f[field.name].hasError(validation.type) && submitted"
           >
             {{ validation.message }}
           </mat-error>
-        </mat-error>
+        </ng-container>
       </mat-form-field>
     </ng-container>
   </div>

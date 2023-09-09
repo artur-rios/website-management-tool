@@ -18,6 +18,7 @@ export class FormComponent implements OnChanges {
   @Output() formSubmit: EventEmitter<any> = new EventEmitter<any>();
 
   public form: FormGroup;
+  public formReset = false;
   public submitted = false;
 
   constructor(private formBuilder: FormBuilder) {
@@ -39,8 +40,15 @@ export class FormComponent implements OnChanges {
   public onSubmit(): void {
     this.submitted = true;
 
-    //! TEST
-    console.log('FORM:', this.form.valid);
+    if (this.formReset) {
+      if (!this.f['email'].value) {
+        this.f['email'].setErrors({ required: true });
+      }
+
+      if (!this.f['password'].value) {
+        this.f['password'].setErrors({ required: true });
+      }
+    }
 
     if (this.form.valid) {
       this.formSubmit.emit(this.form.value);
@@ -61,6 +69,7 @@ export class FormComponent implements OnChanges {
   }
 
   private resetForm(form: FormGroup<any>): void {
+    this.formReset = true;
     form.reset();
     Object.keys(form.controls).forEach((key) => {
       form.controls[key].setErrors(null);
